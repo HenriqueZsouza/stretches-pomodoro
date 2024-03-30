@@ -1,6 +1,9 @@
 let intervalId
 let timeLeft
 let paused = false
+let listExercises = []
+let currentExercises = 0
+let offset = 0
 
 function startTimer() {
   const minutesInput = document.getElementById('minutes')
@@ -14,6 +17,14 @@ function startTimer() {
       if (timeLeft < 0) {
         clearInterval(intervalId)
         document.getElementById('timer').innerText = 'Tempo esgotado!'
+        showExercise()
+        if (currentExercises === 9) {
+          offset = offset + 10
+          currentExercises = 0
+          getExercices()
+          return
+        }
+        currentExercises++
       } else {
         const minutes = Math.floor(timeLeft / 60)
         const seconds = timeLeft % 60
@@ -41,3 +52,16 @@ document.getElementById('reset').addEventListener('click', () => {
   document.getElementById('minutes').value = '00'
   document.getElementById('seconds').value = '00'
 })
+
+document.getElementById('finishedExercise').addEventListener('click', () => {
+  document.getElementById('exerciseContainer').style.display = 'none'
+})
+
+function showExercise() {
+  const nameExercise = document.getElementById('name_exercise')
+  const instructionsExercise = document.getElementById('instructions_exercise')
+
+  nameExercise.innerText = listExercises[currentExercises].name
+  instructionsExercise.innerText = listExercises[currentExercises].instructions
+  document.getElementById('exerciseContainer').style.display = 'block'
+}
