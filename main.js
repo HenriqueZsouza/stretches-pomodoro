@@ -16,7 +16,7 @@ function startTimer() {
     if (!paused) {
       if (timeLeft < 0) {
         clearInterval(intervalId)
-        document.getElementById('timer').innerText = 'Tempo esgotado!'
+        document.getElementById('timer').innerText = 'O tempo acabou!'
         showExercise()
         if (currentExercises === 9) {
           offset = offset + 10
@@ -53,10 +53,6 @@ document.getElementById('reset').addEventListener('click', () => {
   document.getElementById('seconds').value = '00'
 })
 
-document.getElementById('finishedExercise').addEventListener('click', () => {
-  document.getElementById('exerciseContainer').style.display = 'none'
-})
-
 function showExercise() {
   const nameExercise = document.getElementById('name_exercise')
   const instructionsExercise = document.getElementById('instructions_exercise')
@@ -65,3 +61,7 @@ function showExercise() {
   instructionsExercise.innerText = listExercises[currentExercises].instructions
   document.getElementById('exerciseContainer').style.display = 'block'
 }
+
+document.getElementById('finishedExercise').addEventListener('click', () => {
+  document.getElementById('exerciseContainer').style.display = 'none'
+})

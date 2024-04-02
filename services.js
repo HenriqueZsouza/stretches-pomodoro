@@ -7,7 +7,6 @@ function getExercices() {
     .then(response => response.json())
     .then(data => {
       listExercises = data
-      console.log(listExercises)
     })
     .catch(error => console.log(error))
 
